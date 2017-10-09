@@ -16,7 +16,7 @@ var campgroundRoutes = require(__dirname + "/routes/campgrounds"),
 // seedDB();
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://192.168.0.47:27017/yelp_camp", {useMongoClient: true});
+mongoose.connect("mongodb://localhost:27017/yelp_camp", {useMongoClient: true});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
@@ -48,6 +48,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use(indexRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(3000, function () {
+app.listen(process.env.PORT, process.env.IP, function () {
     console.log("YelpCamp has started!!!");
 });
